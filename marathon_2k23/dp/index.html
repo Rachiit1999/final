@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Agra Marathon DP creator">
+    <meta name="description" content="This is the tool yo generate your dp ">
+    <meta name="keywords" content="Shubham, AgraEktaMarathon, AgrawalSamajSamiti">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="Shubham Gupta">
+    <link rel="shortcut icon" href="./agrsen.png" type="image/x-icon">
+    <title>AgraEkta Marathon DP</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <script>
+        $(function() {
+            $("#image").draggable();
+        });
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            height: 100vh;
+            width: 100vw;
+            text-align: center;
+        }
+        
+        .dp {
+            width: 350px;
+            height: 350px;
+            margin: 30px auto;
+            max-width: 400px;
+            max-height: 400px;
+            /* border: solid thin lime; */
+            background: url('./bg.png') no-repeat;
+            background-size: contain;
+            padding-top: 153px;
+            padding-left: 38px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+        
+        #text {
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            background: transparent;
+            text-align: center;
+            margin-top: 7px;
+            display: inline-block;
+            margin-left: -8%;
+            outline: none;
+        }
+        
+        #download {
+            border: none;
+            background-color: #4a4;
+            color: #fff;
+            padding: 10px 50px;
+            font-weight: bold;
+            min-height: 40px;
+            border-radius: 5px;
+            border-bottom: solid 5px #292;
+        }
+        
+        .box {
+            /* border: solid thin lime; */
+            width: 106px;
+            height: 115px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', _ => {
+            let file = document.getElementById('file');
+            let image = document.getElementById('image')
+
+            file.addEventListener('change', e => {
+                debugger
+                image.src = URL.createObjectURL(file.files[0])
+
+
+            })
+        })
+
+        function download() {
+            html2canvas(document.querySelector('.dp'), {
+                    allowTaint: true,
+                    logging: true
+                })
+                .then(canvas => {
+                    let link = document.createElement('a');
+                    link.download = 'marathon-dp.jpeg';
+                    link.href = canvas.toDataURL();
+                    link.click();
+
+                })
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+    <!-- The existing file input somewhere in our form -->
+    <input type="file" name="" id="file">
+
+    <!-- The script tag we just added to our page -->
+    <script defer src="https://cdn.crop.guide/loader/l.js?c=123ABC"></script>
+
+
+    <div class="dp">
+        <div class="box">
+            <img id="image" src="./placeholder.png" width="100%" />
+        </div>
+        <input id="text" type="text" placeholder="Name" autofocus>
+    </div>
+
+    <input id="download" type="button" value="Download" onclick="download()">
+
+</body>
+
+</html>
